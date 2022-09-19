@@ -1,0 +1,8 @@
+service init-custom /system/bin/sh /init.custom.sh
+    class core
+    user root
+    restart_period 5
+
+on boot
+	start init-custom
+

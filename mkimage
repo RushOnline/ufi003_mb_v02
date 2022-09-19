@@ -1,0 +1,31 @@
+#!/bin/sh
+
+BASEPATH="parts/boot.bin"
+
+base=`cat ${BASEPATH}-base`
+board=`cat ${BASEPATH}-board`
+cmdline=`cat ${BASEPATH}-cmdline`
+dt=${BASEPATH}-dt
+hashtype=`cat ${BASEPATH}-hashtype`
+kernel=${BASEPATH}-kernel
+kernel_offset=`cat ${BASEPATH}-kernel_offset`
+pagesize=`cat ${BASEPATH}-pagesize`
+ramdisk=${BASEPATH}-ramdisk
+ramdisk_offset=`cat ${BASEPATH}-ramdisk_offset`
+second_offset=`cat ${BASEPATH}-second_offset`
+tags_offset=`cat ${BASEPATH}-tags_offset`
+
+
+mkbootimg						\
+	--kernel $kernel				\
+	--ramdisk $ramdisk				\
+	--cmdline "$cmdline"				\
+	--base $base					\
+	--kernel_offset $kernel_offset			\
+	--ramdisk_offset $kernel_offset			\
+	--dt $dt					\
+	--second_offset $second_offset			\
+	--tags_offset $tags_offset			\
+	--pagesize $pagesize				\
+	--hashtype $hashtype				\
+	-o boot.img
